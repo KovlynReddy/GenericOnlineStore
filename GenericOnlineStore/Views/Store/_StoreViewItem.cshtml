@@ -1,0 +1,11 @@
+﻿@model GenericOnlineStore.Models.ViewModels.StoreItemViewModel
+
+    <div class="media border p-3">
+        <img src="~/@Model.ImagePath" alt="@Model.ImagePath" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+        <div class="media-body">
+            <h4>@Model.item.ItemName <small><i>$ @Model.item.Value</i></small></h4>
+
+            <p>@Model.item.Genre</p>
+            <p> @Model.Quantity  @Model.SubTotal</p>
+        </div>
+    </div>

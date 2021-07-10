@@ -1,0 +1,60 @@
+﻿@model GenericOnlineStore.Models.ViewModels.CreateItemViewModel
+
+@{
+    ViewData["Title"] = "CreateItem";
+}
+
+<h1>CreateItem</h1>
+
+<h4>BaseItem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+    <form method="post" enctype="multipart/form-data" asp-controller="Store" asp-action="CreateItem">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="ItemName" class="control-label"></label>
+        <input asp-for="ItemName" class="form-control" />
+        <span asp-validation-for="ItemName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Value" class="control-label"></label>
+        <input asp-for="Value" class="form-control" />
+        <span asp-validation-for="Value" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Genre" class="control-label"></label>
+        <input asp-for="Genre" class="form-control" />
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        @*<img src="@Model.ImagePath" alt="User Logo" asp-append-version="true" />*@
+        <input type="file" class="btn" asp-for="uploadedImage" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        //$(".custom-file-input").on("change", function () {
+        //    var fileName = $(this).val().split("\\").pop();
+        //    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        //});
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

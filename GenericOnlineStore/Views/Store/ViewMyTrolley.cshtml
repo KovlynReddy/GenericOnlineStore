@@ -1,0 +1,11 @@
+﻿@model GenericOnlineStore.Models.ViewModels.TrolleyViewModel
+
+
+@foreach (var item in Model.ItemsPurchased)
+{
+
+    <partial name="_StoreViewItem" model="item" />
+
+}
+
+Total = @Model.FinalTotal
