@@ -1,8 +1,6 @@
 ﻿@model GenericOnlineStore.Models.ViewModels.StoreItemViewModel
 
 
-<div class="row">
- <div class="col-md-10">
 
         <form asp-action="AddToCart">
 
@@ -14,7 +12,7 @@
                     </div>
                     <div class="col-md-3">
                 <div class="media-body">
-                    <h4>@Model.item.ItemName <small><i>$ @Model.item.Value</i></small></h4>
+                    <h4>@Model.item.ItemName <small><i>R @Model.item.Value</i></small></h4>
                     <p>@Model.item.Genre</p>
                 </div>
                     </div>
@@ -35,8 +33,7 @@
                 </div>
                 
         </form>
-     </div>
-</div>
+ 
 
 
 

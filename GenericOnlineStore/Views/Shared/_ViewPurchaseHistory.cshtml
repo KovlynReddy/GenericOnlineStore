@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GenericOnlineStore.Models.ViewModels.ViewPurchaseViewModel>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemsPurchased.First().item.ItemName)
+            </th>     
+            <th>
+                @Html.DisplayNameFor(model => model.ItemsPurchased.First().item.Value)
+            </th>     
+            <th>
+                @Html.DisplayNameFor(model => model.ItemsPurchased.First().Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemsPurchased.First().SubTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemsPurchased.First().ImagePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reciept in Model)
+        {
+            @foreach (var item in reciept.ItemsPurchased)
+            {
+                <tr>
+                    <td>
+                    @item.item.ItemName
+                        
+                    </td>
+                    @item.item.Value
+                    <td>
+                      
+                    </td>
+                    @item.Quantity
+                    <td>
+                        
+                    </td>
+                    @item.SubTotal
+                    <td>
+                        
+                    </td>
+                    <img src="~/@item.item.ImagePath" alt="item image" />
+                    
+                    <td>
+                      
+                    </td>
+                    <th></th>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

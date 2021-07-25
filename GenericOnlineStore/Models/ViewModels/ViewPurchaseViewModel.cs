@@ -8,6 +8,7 @@ namespace GenericOnlineStore.Models.ViewModels
 {
     public class ViewPurchaseViewModel
     {
+        public DateTime TimePurchased { get; set; }
         public List<StoreItemViewModel> ItemsPurchased { get; set; }
     }
 }

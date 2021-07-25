@@ -65,11 +65,45 @@ namespace GenericOnlineStore.Controllers
             newPurchase.ItemId = model.item.ItemId;
             newPurchase.Quantity = model.Quantity;
             newPurchase.TimePurchased = DateTime.Now;
+            newPurchase.APurchaseId = Guid.NewGuid().ToString();
 
             _Db.AddPurchase(newPurchase);
 
             return RedirectToAction("ViewAllItems");
         }
+
+
+        public ActionResult RemoveFromCart(StoreItemViewModel buff)
+        {
+            var model = new TrolleyViewModel();
+
+            var purchases = _Db.GetAllPurchases();
+            var myPurchases = purchases.Where(m => m.UserId == User.Identity.Name).ToList();
+            var todaysPurchases = myPurchases.Where(m => m.TimePurchased.Date == DateTime.Today).ToList();
+            //get all purchases related to this email
+            // get all purchases made today
+            var allItems = _Db.GetAllItems();
+
+            List<StoreItemViewModel> models = new List<StoreItemViewModel>();
+            int total = 0;
+
+            foreach (var item in todaysPurchases)
+            {
+                var purchase = StoreItemViewModel.ToViewModel(allItems.FirstOrDefault(k => k.ItemId == item.ItemId));
+                purchase.SubTotal = purchase.item.Value;// * item.Quantity;
+                total += purchase.SubTotal;
+                models.Add(purchase);
+            }
+
+            var thepurchase = todaysPurchases.FirstOrDefault(m => m.ItemId == buff.item.ItemId);
+            _Db.DeletePurchase(thepurchase);
+
+            model.ItemsPurchased = models;
+            model.FinalTotal = total;
+
+            return RedirectToAction("ViewAllItems");
+        }
+
 
         public ActionResult ViewMyTrolley() {
 
@@ -78,20 +112,35 @@ namespace GenericOnlineStore.Controllers
             var purchases = _Db.GetAllPurchases();
             var myPurchases = purchases.Where( m => m.UserId == User.Identity.Name).ToList();
             var todaysPurchases = myPurchases.Where( m => m.TimePurchased.Date == DateTime.Today).ToList();
+            todaysPurchases = todaysPurchases.Where(m => m.Buffer != "Purchased").ToList();
             //get all purchases related to this email
             // get all purchases made today
             var allItems = _Db.GetAllItems();
 
+            if (myPurchases.Count == 0 )
+            {
+
             todaysPurchases.AddRange(myPurchases);
 
+            }
+            
+
             List<StoreItemViewModel> models = new List<StoreItemViewModel>();
+            int total = 0;
 
             foreach (var item in todaysPurchases)
             {
-                models.Add(StoreItemViewModel.ToViewModel(allItems.FirstOrDefault(k => k.ItemId == item.ItemId)));
+                var purchase = StoreItemViewModel.ToViewModel(allItems.FirstOrDefault(k => k.ItemId == item.ItemId));
+                purchase.SubTotal = purchase.item.Value * item.Quantity;
+                total += purchase.SubTotal;
+                purchase.Quantity = item.Quantity;
+                models.Add(purchase);
             }
 
+
+            
             model.ItemsPurchased = models;
+            model.FinalTotal = total;
             return View(model);
         }
 
@@ -122,6 +171,52 @@ namespace GenericOnlineStore.Controllers
 
             return RedirectToAction("ViewAllItems","Store");
         }
+
+        [HttpGet]
+        public IActionResult ViewReciept(string id)
+        {
+
+            var model = new TrolleyViewModel();
+
+            var purchases = _Db.GetAllPurchases();
+            var myPurchases = purchases.Where(m => m.UserId == User.Identity.Name).ToList();
+            var recieptpurchases = myPurchases.Where(m => m.PurchaseDetails == id).ToList();
+            //get all purchases related to this email
+            // get all purchases made today
+            var allItems = _Db.GetAllItems();
+
+
+            List<StoreItemViewModel> models = new List<StoreItemViewModel>();
+            int total = 0;
+
+            foreach (var item in recieptpurchases)
+            {
+                var purchase = StoreItemViewModel.ToViewModel(allItems.FirstOrDefault(k => k.ItemId == item.ItemId));
+                purchase.SubTotal = purchase.item.Value * item.Quantity;
+                total += purchase.SubTotal;
+                purchase.Quantity = item.Quantity;
+                models.Add(purchase);
+            }
+
+
+
+            model.ItemsPurchased = models;
+            model.FinalTotal = total;
+            // get reciept
+
+            // get all purchases on reciept 
+
+            // get item for each purchase 
+
+            // get subtotal for purchase quantity * item cost 
+
+            // get total of all items subtotals together 
+            // get date time purchased 
+
+            return View(model);
+
+        }
+
         // POST: StoreController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -177,6 +272,12 @@ namespace GenericOnlineStore.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public IActionResult CheckOut() {
+
+            return View();
         }
     }
 }

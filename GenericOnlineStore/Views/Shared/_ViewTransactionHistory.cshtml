@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GenericOnlineStore.Models.DataModels.ATransaction>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtraDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.buffer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExtraDetails)
+            </td>
+
+            <td>
+                <a asp-controller="Store" asp-action="ViewReciept" asp-route-id="@item.TransactionId" class="btn btn-secondary"> ViewReciept </a>
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

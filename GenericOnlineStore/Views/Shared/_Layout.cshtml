@@ -7,8 +7,8 @@
     <title>@ViewData["Title"] - GenericOnlineStore</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"/>
 
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -23,27 +23,80 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Home </a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="icon-home"></i>  </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index"> Add Item</a>
-                        </li>       
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="ViewAllItems">Store Catalogue</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="ViewAllItems"><i class="icon-calendar-empty"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="ViewMyTrolley"> Trolley </a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="ViewMyTrolley"> <i class="icon-shopping-cart"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewMyAccount"><i class="icon-credit-card"></i> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Links"><i class="icon-sitemap"></i></a>
+                        </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TechSupport"><i class="icon-comments"></i> </a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index"><i class="icon-plus-sign-alt"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    <div class="row">
+        <div class="col-md-2">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse"  >
+        <div class="position-sticky pt-3">
+            <ul class="nav flex-column" style="color: white;">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><span data-feather="shopping-cart"></span><i class="icon-bolt"></i></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"><span data-feather="home"></span><i class="icon-heart"></i> </a>
+                </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"><span data-feather="home"></span><i class="icon-code-fork"></i></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"><span data-feather="home"></span><i class="icon-rocket"></i></a>
+                </li>
+                <li class="fixed-bottom">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-dark"><i class="icon-off"></i></button>
+                    </form>
+                </li>
+            </ul>
+            <ul class="nav flex-column mb-2">
+            </ul>
+
+        </div>
+    </nav>
+            </div>
+        <div class="col-md-8">
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+            </div>
+        <div class="col-md-2" style="background-color:rgb(41, 41, 41);">
+    <div style="background-color:rgb(41, 41, 41);">
+        <img src="~/AdvertPlaceholder.jpg" class="card-img" style="width:auto;">
+        <img src="~/AdvertPlaceholder.jpg" class="card-img" style="width:auto;">
+        <img src="~/AdvertPlaceholder.jpg" class="card-img" style="width:auto;">
+
+
+    </div>
+            </div>
+        </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">

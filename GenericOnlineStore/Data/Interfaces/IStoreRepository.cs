@@ -18,6 +18,7 @@ namespace GenericOnlineStore.Data.Interfaces
     #region purchases
         APurchase AddPurchase(APurchase newItem);
         APurchase DeletePurchase(APurchase Item);
+        APurchase DeletePurchase(string ItemId);
         APurchase UpdatePurchase(APurchase updatedItem);
         List<APurchase> GetAllPurchases();
     #endregion

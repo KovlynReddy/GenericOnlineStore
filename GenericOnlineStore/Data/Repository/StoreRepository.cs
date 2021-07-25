@@ -1,5 +1,6 @@
 ﻿using GenericOnlineStore.Data.Interfaces;
 using GenericOnlineStore.Models.DataModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,17 +52,35 @@ namespace GenericOnlineStore.Data.Repository
 
         public APurchase DeletePurchase(APurchase Item)
         {
-            throw new NotImplementedException();
+            _DB.purchases.Remove(Item);
+            _DB.SaveChanges();
+            return Item;    
         }
 
         public APurchase UpdatePurchase(APurchase updatedItem)
         {
-            throw new NotImplementedException();
+
+
+            _DB.Update(updatedItem);
+            _DB.Entry(updatedItem).State = EntityState.Modified;
+
+            _DB.SaveChanges();
+
+            return updatedItem;
         }
 
         public List<APurchase> GetAllPurchases()
         {
             return _DB.purchases.ToList();
+        }
+
+        public APurchase DeletePurchase(string ItemId)
+        {
+            var item = GetAllPurchases().FirstOrDefault(m => m.APurchaseId == ItemId);
+
+            _DB.purchases.Remove(item);
+            _DB.SaveChanges();
+            return item;
         }
     }
 }

@@ -1,11 +1,41 @@
 ﻿@model GenericOnlineStore.Models.ViewModels.StoreItemViewModel
 
-    <div class="media border p-3">
-        <img src="~/@Model.ImagePath" alt="@Model.ImagePath" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-        <div class="media-body">
-            <h4>@Model.item.ItemName <small><i>$ @Model.item.Value</i></small></h4>
 
-            <p>@Model.item.Genre</p>
-            <p> @Model.Quantity  @Model.SubTotal</p>
-        </div>
-    </div>
+        <form asp-action="RemoveFromCart" asp-controller="Store">
+
+            <div class="media border p-3 d-flex justify-content-center text-center " style="width:auto">
+                <div class="row">
+                    <div class="col-md-3  p-3 d-flex justify-content-center text-center ">
+                        @*style="width:inherit;height:auto;"*@
+                        <img src="~/@Model.ImagePath" alt="@Model.ImagePath" class="mr-3 mt-3 rounded-circle  p-3 d-flex justify-content-center text-center " style="width: 150px; height: 150px;">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="media-body">
+                            <h4>@Model.item.ItemName <small><i>R @Model.item.Value</i></small></h4>
+                            <p>@Model.item.Genre</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.HiddenFor(m => m.item.ItemId)
+
+                    <div class="form-group">
+                        <label asp-for="Quantity" class="control-label"></label>
+                        @Html.DisplayFor(m=>m.Quantity)
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+
+                        <input type="submit" value="Remove" class="btn btn-danger" />
+                    </div>
+                    <br />
+
+                </div>
+            </div>
+
+        </form>
+ 
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

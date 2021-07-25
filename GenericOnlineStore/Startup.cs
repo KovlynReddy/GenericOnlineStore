@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,15 @@ namespace GenericOnlineStore
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
+            services.AddAuthentication()
+            .AddFacebook(options =>
+             {
+                 options.ClientId = "1035409653660964";
+                 options.ClientSecret = "65af40d75752ec9c6c2c2468a16d4d9e";
+             });
+
             services.AddScoped<IStoreRepository,StoreRepository>();
+            services.AddScoped<IPayment,PaymentRepository>();
 
             services.AddRazorPages();
         }

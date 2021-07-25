@@ -9,3 +9,8 @@
 }
 
 Total = @Model.FinalTotal
+
+
+@Html.ActionLink("Checkout", "Checkout", "Payment");
+<a asp-action="Checkout" asp-controller="Payment" class="btn btn-success" asp-route-item="@Model"> Check Out  </a>
+<a asp-action="Checkout" asp-controller="Store" class="btn btn-success"> Check Out store </a>
