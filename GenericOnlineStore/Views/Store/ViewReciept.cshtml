@@ -1,11 +1,18 @@
 ﻿@model GenericOnlineStore.Models.ViewModels.TrolleyViewModel
 
+    User : <h4>@User.Identity.Name</h4>
+<br/>
+DatePurchased : @Model.DatePurchased
+<br/>
+Total = R @Model.FinalTotal
+<hr/>
 
 @foreach (var item in Model.ItemsPurchased)
 {
 
-    <partial name="_StoreViewItem" model="item" />
+    <partial name="_RecieptItemModel" model="item" />
+    <hr/>
 
 }
 
-Total = @Model.FinalTotal
+<hr/>

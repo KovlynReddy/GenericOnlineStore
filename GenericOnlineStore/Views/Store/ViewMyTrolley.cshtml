@@ -1,5 +1,18 @@
 ﻿@model GenericOnlineStore.Models.ViewModels.TrolleyViewModel
 
+@if (Model.DatePurchased != new DateTime() && Model.DatePurchased != null)
+{
+
+    @Html.Raw($"<h4>Date = {Model.DatePurchased}</h4>")
+
+
+}
+else
+{
+    @Html.Raw($"<h4>Date = {DateTime.Now}</h4>")
+}
+
+<hr />
 
 @foreach (var item in Model.ItemsPurchased)
 {
@@ -7,10 +20,8 @@
     <partial name="_StoreViewItem" model="item" />
 
 }
+<hr />
 
 Total = @Model.FinalTotal
 
-
-@Html.ActionLink("Checkout", "Checkout", "Payment");
 <a asp-action="Checkout" asp-controller="Payment" class="btn btn-success" asp-route-item="@Model"> Check Out  </a>
-<a asp-action="Checkout" asp-controller="Store" class="btn btn-success"> Check Out store </a>

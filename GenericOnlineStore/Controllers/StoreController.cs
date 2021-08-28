@@ -199,7 +199,7 @@ namespace GenericOnlineStore.Controllers
             }
 
 
-
+            model.DatePurchased = recieptpurchases.First().TimePurchased;
             model.ItemsPurchased = models;
             model.FinalTotal = total;
             // get reciept

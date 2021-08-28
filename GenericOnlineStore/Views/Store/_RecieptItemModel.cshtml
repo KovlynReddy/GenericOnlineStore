@@ -1,8 +1,9 @@
 ﻿@model GenericOnlineStore.Models.ViewModels.StoreItemViewModel
 
 
+<form asp-action="RemoveFromCart" asp-controller="Store">
 
-<form asp-action="AddToCart">
+
 
     <div class="row">
         <div class="col-md-2 float-left ">
@@ -23,21 +24,18 @@
         @Html.HiddenFor(m => m.item.ItemId)
 
         <div class="form-group">
-<label asp-for="Quantity" class="control-label"></label>
-<input asp-for="Quantity" class="form-control" />
-<span asp-validation-for="Quantity" class="text-danger"></span>
-
-<input type="submit" value="Add To Cart" class="btn btn-success" />
-
-                </div>
-                </div>
+            <label asp-for="Quantity" class="control-label"></label>
+            @Html.DisplayFor(m => m.Quantity)
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+            <br />
+            <label asp-for="SubTotal" class="control-label"></label>
+            R @Html.DisplayFor(m => m.SubTotal)
+            <input type="submit" value="Details" class="btn float-right" />
         </div>
 
+
+    </div>
+</div>
+
+
 </form>
- 
-
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

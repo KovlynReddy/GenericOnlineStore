@@ -12,7 +12,7 @@ namespace GenericOnlineStore.Models.DataModels
         public int Id { get; set; }
         public string Buffer { get; set; }
         public string APurchaseItemID { get; set; } // item in trolley link
-        public string APurchaseId { get; set; } // trolley link
+        public string APurchaseId { get; set; } // trolley link     
         public string ItemId { get; set; } // item link 
         public string UserId { get; set; } // payer link
         public string PurchaseDetails { get; set; } // details 
